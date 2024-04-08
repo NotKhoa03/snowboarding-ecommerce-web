@@ -59,3 +59,25 @@ table th {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
 }
+
+.my-rounded-card {
+  border-radius: 25px;
+}
+
+.background-image {
+  /* Replace 'your-image-url' with the URL of your image */
+  background: url('https://media.istockphoto.com/id/1446438866/photo/happy-couple-snowboarders-having-fun.jpg?s=2048x2048&w=is&k=20&c=OlNq5oL1s1iT9hc7OQ13AmYb6LtGH9-r2m0zaMFiHaU=') no-repeat center center fixed; 
+ 
+  background-size: cover;
+
+  /* Apply a blur filter to the background image */
+  
+
+  /* Ensure the background image covers the entire component */
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
