@@ -71,6 +71,19 @@ const products = [
     rating: 4,
     numReviews: 12,
   },
+
+  {
+    name: 'Snowboard',
+    image: '/images/alexa.jpg',
+    description:
+      'Meet Echo Dot - Ourwfwafawf most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
+    brand: 'Amazon',
+    category: 'Electfwafronics',
+    price: 29.99,
+    countInStock: 0,
+    rating: 4,
+    numReviews: 12,
+  },
 ]
 
 export default products
