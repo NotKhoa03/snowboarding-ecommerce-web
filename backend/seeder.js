@@ -8,9 +8,13 @@ import Product from "./models/productModel.js"
 import Order from "./models/orderModel.js"
 import connectDB from "./config/db.js"
 
+//Connects to the DB and imports data
+
 dotenv.config()
 
 connectDB()
+
+//Seeds data into the database
 
 const importData = async () => {
     try {
@@ -36,6 +40,7 @@ const importData = async () => {
     }
 }
 
+//Deletes data from the database
 const destroyData = async () => {
     try {
         await Order.deleteMany();
@@ -50,6 +55,7 @@ const destroyData = async () => {
     }
 }
 
+//Command line to delete/add when in dev mode
 if(process.argv[2] === "-d") {
     destroyData();
 } else {

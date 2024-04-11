@@ -2,8 +2,10 @@ import e from 'express';
 import asyncHandler from '../middleware/asyncHandler.js';
 import Product from '../models/productModel.js';
 
+//Controllers for routes
+
 // @desc Fetch all products
-// @route GET /api/products
+// @route GET /api/products from productRoutes.js
 // @access Public
 const getProducts = asyncHandler(async (req, res) => { 
     const products = await Product.find({});

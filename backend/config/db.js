@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 
+// Connect to MongoDB to access order, user, and product data
 const connectDB = async () => {
     try {
         const conn = await mongoose.connect(process.env.MONGO_URI)

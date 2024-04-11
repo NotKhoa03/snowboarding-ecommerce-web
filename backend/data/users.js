@@ -1,5 +1,7 @@
 import bcrypt from 'bcryptjs'
 
+// Sample users data for seeding the database
+
 const users = [
     {
         name: 'Admin User',

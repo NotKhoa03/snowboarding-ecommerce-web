@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 
+//create a review schema
 const reviewSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -22,6 +23,7 @@ const reviewSchema = mongoose.Schema({
     timestamps: true
 })
 
+//create a product schema
 const productSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,

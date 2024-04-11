@@ -1,3 +1,5 @@
+//List of products to seed the DB
+
 const products = [
   {
     name: 'Airpods Wireless Bluetooth Headphones',
