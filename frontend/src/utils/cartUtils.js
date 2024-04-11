@@ -13,7 +13,7 @@ export const updateCart = (state) => {
      //Calculate total price
      state.totalPrice = toDecimals(Number(state.itemsPrice) + Number(state.shippingPrice) + Number(state.taxPrice))
 
-     localStorage.setItem('cart', JSON.stringify(state))
+     localStorage.setItem('cartItems', JSON.stringify(state))
 
      return state
 }

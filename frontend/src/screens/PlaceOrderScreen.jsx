@@ -25,6 +25,8 @@ const PlaceOrderScreen = () => {
     }
   }, [navigate, cart.paymentMethod, cart.shippingAddress.address])
 
+
+  //Place and create order, then redirect to order screen with the created id
   const placeOrderHandler = async () => {
     try {
         const res = await createOrder({

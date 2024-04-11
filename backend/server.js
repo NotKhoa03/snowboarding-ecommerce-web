@@ -35,6 +35,9 @@ app.use('/api/products',productRoutes);
 app.use('/api/users',userRoutes);
 app.use('/api/orders',orderRoutes);
 
+//Store clientId in env file so that it is not exposed to the frontend
+app.get('/api/config/paypal', (req, res) => res.send( {clientId: process.env.PAYPAL_CLIENT_ID }));
+
 //Middleware
 app.use(notFound);
 app.use(errorHandler);
