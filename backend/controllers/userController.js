@@ -107,7 +107,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
     //If user exists, update the user details. If password is updated, hash the password
     if (user) {
-        user.name = req.body.name || user.name //req.body is the data sent in the request
+        //req.body is the data sent in the request
+        //if it doesnt exist then it will be the same as before
+        user.name = req.body.name || user.name 
         user.email = req.body.email || user.email
 
         if (req.body.password){
@@ -121,7 +123,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
             name: updatedUser.name,
             email: updatedUser.email,
             isAdmin: updatedUser.isAdmin,
-        })
+        });
     
     } else {
         res.status(404)
