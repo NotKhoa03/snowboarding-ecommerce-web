@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken'
 import asyncHandler from './asyncHandler.js'
 import User from '../models/userModel.js'
 
+//Middleware to not allow requests to server without token or admin access
+
 // Protect routes
 const protect = asyncHandler(async (req, res, next) => {
     let token
