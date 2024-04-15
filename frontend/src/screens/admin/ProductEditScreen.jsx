@@ -22,9 +22,9 @@ const ProductEditScreen = () => {
 
     const { data: product, isLoading, refetch, error } = useGetProductDetailsQuery(productId)
 
-    const [updateProduct, { isLoading: loadingUpdate, error: updateError }] = useUpdateProductMutation()
+    const [updateProduct, { isLoading: loadingUpdate}] = useUpdateProductMutation()
 
-    const [uploadProductImage, { isLoading: loadingUpload}] = useUploadProductImageMutation()
+    const [uploadProductImage ] = useUploadProductImageMutation()
 
     useEffect(() => {
         if (product) {

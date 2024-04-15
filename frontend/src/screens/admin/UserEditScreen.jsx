@@ -18,7 +18,7 @@ const UserEditScreen = () => {
 
     const { data: user, isLoading, refetch, error } = useGetUserDetailsQuery(userId)
 
-    const [updateUser, { isLoading: loadingUpdate, error: updateError }] = useUpdateUserMutation()
+    const [updateUser, { isLoading: loadingUpdate}] = useUpdateUserMutation()
 
 
     useEffect(() => {

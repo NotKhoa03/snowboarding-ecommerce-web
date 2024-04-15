@@ -8,8 +8,19 @@ import Product from '../models/productModel.js';
 // @route GET /api/products from productRoutes.js
 // @access Public
 const getProducts = asyncHandler(async (req, res) => { 
-    const products = await Product.find({});
-    res.send(products);
+    const pageSize = 8;
+    //req.query.pageNumber is the page number, if not provided, default to 1
+    const page = Number(req.query.pageNumber) || 1;
+
+    //Get the keyword from the query string, case insensitive
+    const keyword = req.query.keyword ? { name: { $regex: req.query.keyword, $options: 'i' } } : {};
+
+    //Get the total number of products available
+    const count = await Product.countDocuments({...keyword});
+
+    //Get the products based on the page number and keyword
+    const products = await Product.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
+    res.send({products, page, pages: Math.ceil(count / pageSize)})
 })
 
 // @desc Fetch single product
@@ -17,6 +28,8 @@ const getProducts = asyncHandler(async (req, res) => {
 // @access Public
 const getProductById = asyncHandler(async (req, res) => { 
     const product = await Product.findById(req.params.id);
+
+    //If product exists, send the product, else throw an error
     if(product){
         return res.send(product);
     } else{
@@ -29,6 +42,7 @@ const getProductById = asyncHandler(async (req, res) => {
 // @route POST /api/products from productRoutes.js
 // @access Private/Admin
 const createProduct = asyncHandler(async (req, res) => { 
+    //Create a new product
     const product = new Product({
         name: 'Sample name',
         price: 0,
@@ -51,10 +65,12 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route PUT /api/products/:id from productRoutes.js
 // @access Private/Admin
 const updateProduct = asyncHandler(async (req, res) => { 
+    //Get the product details from the request body
     const { name, price, description, image, brand, category, countInStock } = req.body;
 
     const product = await Product.findById(req.params.id);
 
+    //If product exists, update the product details, else throw an error
     if(product){
         product.name = name;
         product.price = price;
@@ -77,6 +93,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 const deleteProduct = asyncHandler(async (req, res) => { 
     const product = await Product.findById(req.params.id);
 
+    //If product exists, delete the product, else throw an error
     if(product){
         await Product.deleteOne({_id: product._id})
         res.status(200).send({message: 'Product removed'});
@@ -90,9 +107,11 @@ const deleteProduct = asyncHandler(async (req, res) => {
     // @route POST /api/products/:id/reviews from productRoutes.js
     // @access Private
     const createProductReview = asyncHandler(async (req, res) => { 
+        //Get the rating and comment from the request body
         const { rating, comment } = req.body;
         const product = await Product.findById(req.params.id);
-    
+        
+        //If product exists, check if the user has already reviewed the product
         if(product){
             const alreadyReviewed = product.reviews.find(r => r.user.toString() === req.user._id.toString());
 
@@ -101,6 +120,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
             throw new Error('Product already reviewed');
             }
 
+            //Create a new review if not reviewed
             const review = {
                 name: req.user.name,
                 rating: Number(rating),
@@ -108,6 +128,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
                 user: req.user._id
             }
 
+            //Add the review to the product reviews array
             product.reviews.push(review);
             product.numReviews = product.reviews.length;
             product.rating = product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.reviews.length;
@@ -121,6 +142,15 @@ const deleteProduct = asyncHandler(async (req, res) => {
         }
     })
 
+// @desc Get top rated products
+// @route GET /api/products/top
+// @access Public
+const getTopProducts = asyncHandler(async (req, res) => { 
+    //Get the top 3 products based on the rating
+    const product = await Product.find({}).sort({rating: -1}).limit(3);
+    res.status(200).send(product);
+})
 
 
-export { getProducts, getProductById, createProduct, updateProduct, deleteProduct, createProductReview };
+
+export { getProducts, getProductById, createProduct, updateProduct, deleteProduct, createProductReview, getTopProducts };
