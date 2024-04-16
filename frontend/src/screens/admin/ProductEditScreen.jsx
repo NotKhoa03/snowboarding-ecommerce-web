@@ -5,10 +5,13 @@ import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import { toast } from 'react-toastify'
+import { FaTrash } from 'react-icons/fa'
 import { useGetProductDetailsQuery, useUpdateProductMutation, useUploadProductImageMutation } from '../../slices/productApiSlice'
 const ProductEditScreen = () => {
     //Reminder that useParams is a hook that returns an object of key/value pairs of URL parameters. Anything with :id in the URL will be a key in the object
     const { id: productId } = useParams()
+
+    const [sizes, setSizes] = useState([{ size: '', qty: 0 }]);
 
     const navigate = useNavigate()
 
@@ -35,6 +38,8 @@ const ProductEditScreen = () => {
             setCategory(product.category)
             setCountInStock(product.countInStock)
             setDescription(product.description)
+            setSizes(product.sizes)
+            
         }
     
     }, [product])
@@ -51,6 +56,7 @@ const ProductEditScreen = () => {
             category,
             description,
             countInStock,
+            sizes
           }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
           toast.success('Product updated');
           refetch();
@@ -71,6 +77,31 @@ const ProductEditScreen = () => {
             toast.error(error?.data?.message || error.error)
         }
     }
+
+    // Function to handle input change
+    const handleInputChange = (index, event) => {
+        const values = [...sizes];
+        if (event.target.name === "size") {
+            values[index].size = event.target.value;
+        } else {
+            values[index].qty = event.target.value;
+        }
+        setSizes(values);
+    };
+
+    // Function to handle size removal
+
+    const handleRemoveSize = index => {
+        const values = [...sizes];
+        values.splice(index, 1);
+        setSizes(values);
+    }
+
+    // Function to handle adding new size
+    const handleAddSize = () => {
+        setSizes([...sizes, { size: '', qty: 0 }]);
+      };
+      
 
   return <>
     <Link to='/admin/productlist' className='btn btn-light my-3'>Go Back</Link>
@@ -109,9 +140,40 @@ const ProductEditScreen = () => {
                     <Form.Label>Description</Form.Label>
                     <Form.Control type='text' placeholder='Enter description' value={description} onChange={(e) => setDescription(e.target.value)}></Form.Control>
                 </Form.Group>
-                <Button type='submit' className='my-2' variant='primary'>
+                {sizes.map((sizeStock, index) => (
+                <div key={index}>
+                    <div className="size-delete">
+                        <Form.Group className="size-length" controlId={`size${index}`}>
+                        <Form.Label>Size</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="size"
+                            placeholder="Enter size"
+                            value={sizeStock.size}
+                            onChange={event => handleInputChange(index, event)}
+                        />
+                        </Form.Group>
+                        <Button type="button" className="trash-button" onClick={() => handleRemoveSize(index)}> <FaTrash/> </Button>
+                    </div>
+                    <Form.Group controlId={`qty${index}`}>
+                    <Form.Label>Quantity</Form.Label>
+                    <Form.Control
+                        type="number"
+                        name="qty"
+                        placeholder="Enter quantity"
+                        value={sizeStock.qty}
+                        onChange={event => handleInputChange(index, event)}
+                    />
+                    </Form.Group>
+                   
+                    
+                </div>
+                ))}
+                <Button type='submit' variant='primary'>
                     Update
                 </Button>
+                <Button type="button" className='mx-2' onClick={handleAddSize} >Add a Size</Button>
+                
             </Form>
         )}
     </FormContainer>

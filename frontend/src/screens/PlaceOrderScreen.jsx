@@ -6,7 +6,8 @@ import { toast } from 'react-toastify'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import CheckoutSteps from '../components/CheckoutSteps'
-import { useCreateOrderMutation } from '../slices/ordersApiSlice'
+import { useCreateOrderMutation} from '../slices/ordersApiSlice'
+import { useUpdateProductStockMutation } from '../slices/productApiSlice'
 import { clearCartItems } from '../slices/cartSlice'
 
 const PlaceOrderScreen = () => {
@@ -15,6 +16,7 @@ const PlaceOrderScreen = () => {
 
   const cart = useSelector(state => state.cart)
   const [createOrder, { isLoading, error }] = useCreateOrderMutation()
+  const [updateProductStock] = useUpdateProductStockMutation()
 
   useEffect(() => {
     if (!cart.shippingAddress.address) {
@@ -28,7 +30,9 @@ const PlaceOrderScreen = () => {
 
   //Place and create order, then redirect to order screen with the created id
   const placeOrderHandler = async () => {
+    console.log(cart.cartItems)
     try {
+        //create an order
         const res = await createOrder({
             orderItems: cart.cartItems,
             shippingAddress: cart.shippingAddress,
@@ -38,6 +42,13 @@ const PlaceOrderScreen = () => {
             shippingPrice: cart.shippingPrice,
             totalPrice: cart.totalPrice
         }).unwrap()
+
+        //update the stock of the products
+        for (let item of cart.cartItems) {
+            // Call updateProductStock for each item
+            await updateProductStock({ id: item._id, size: item.selectedSize.size, qty: item.qty });
+        }
+
         dispatch(clearCartItems())
         navigate(`/order/${res._id}`)
     } catch (error) {

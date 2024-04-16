@@ -1,5 +1,6 @@
 
 
+
 import { PRODUCTS_URL, UPLOAD_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
@@ -34,6 +35,15 @@ export const productApiSlice = apiSlice.injectEndpoints({
             //Don't use {} to wrap data that will destructure and look for data. 
             query: (data) => ({
                 url: `${PRODUCTS_URL}/${data.productId}`,
+                method: 'PUT',
+                body: data
+            }),
+            invalidatesTags: ['Products'],
+        }),
+
+        updateProductStock: builder.mutation({
+            query: (data) => ({
+                url: `${PRODUCTS_URL}/${data.productId}/stock`,
                 method: 'PUT',
                 body: data
             }),
@@ -75,4 +85,4 @@ export const productApiSlice = apiSlice.injectEndpoints({
     
 })
 
-export const { useGetProductsQuery, useGetProductDetailsQuery, useCreateProductMutation, useUpdateProductMutation, useUploadProductImageMutation, useDeleteProductMutation, useCreateReviewMutation, useGetTopProductsQuery } = productApiSlice;
+export const { useGetProductsQuery, useGetProductDetailsQuery, useCreateProductMutation, useUpdateProductMutation, useUpdateProductStockMutation, useUploadProductImageMutation, useDeleteProductMutation, useCreateReviewMutation, useGetTopProductsQuery } = productApiSlice;

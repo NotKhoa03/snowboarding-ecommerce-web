@@ -66,7 +66,7 @@ const createProduct = asyncHandler(async (req, res) => {
 // @access Private/Admin
 const updateProduct = asyncHandler(async (req, res) => { 
     //Get the product details from the request body
-    const { name, price, description, image, brand, category, countInStock } = req.body;
+    const { name, price, description, image, brand, category, countInStock, sizes } = req.body;
 
     const product = await Product.findById(req.params.id);
 
@@ -79,10 +79,46 @@ const updateProduct = asyncHandler(async (req, res) => {
         product.brand = brand;
         product.category = category;
         product.countInStock = countInStock;
+        product.sizes = sizes;
 
         const updatedProduct = await product.save();
         res.send(updatedProduct);
     } else{
+        res.status(404);
+        throw new Error('Product not found');
+    }
+})
+
+// @desc Update a product's stock count after checkout
+// @route PUT /api/products/:id/stock from productRoutes.js
+// @access Private/Admin
+const updateProductStock = asyncHandler(async (req, res) => { 
+    // Get the size and new stock count from the request body
+    const { size, qty, id } = req.body;
+
+    const product = await Product.findById(id);
+
+    // If product exists, update the stock count for the specified size, else throw an error
+    if(product){
+        // Find the size in the product's sizes array
+        const sizeObj = product.sizes.find(s => s.size === size);
+
+        if (sizeObj) {
+            // Update the stock count for this size
+            sizeObj.qty -= qty;
+
+            // If the stock count becomes negative, set it to 0
+            if (sizeObj.qty < 0) {
+                sizeObj.qty = 0;
+            }
+
+            const updatedProduct = await product.save();
+            res.send(updatedProduct);
+        } else {
+            res.status(404);
+            throw new Error('Size not found');
+        }
+    } else {
         res.status(404);
         throw new Error('Product not found');
     }
@@ -153,4 +189,4 @@ const getTopProducts = asyncHandler(async (req, res) => {
 
 
 
-export { getProducts, getProductById, createProduct, updateProduct, deleteProduct, createProductReview, getTopProducts };
+export { getProducts, getProductById, createProduct, updateProduct, updateProductStock, deleteProduct, createProductReview, getTopProducts };
