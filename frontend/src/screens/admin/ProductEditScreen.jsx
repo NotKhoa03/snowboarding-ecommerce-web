@@ -169,10 +169,12 @@ const ProductEditScreen = () => {
                     
                 </div>
                 ))}
-                <Button type='submit' variant='primary'>
-                    Update
-                </Button>
-                <Button type="button" className='mx-2' onClick={handleAddSize} >Add a Size</Button>
+                <div className='my-2'>
+                    <Button type='submit' variant='primary'>
+                        Update
+                    </Button>
+                    <Button type="button" className='mx-2' onClick={handleAddSize} >Add a Size</Button>
+                </div>
                 
             </Form>
         )}
