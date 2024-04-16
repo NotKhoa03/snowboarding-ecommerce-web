@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import logo from '../assets/logo.png'
 import { useLogoutMutation } from '../slices/usersApiSlice'
 import SearchBox from './SearchBox'
+import CategoryNavigation from './CategoryNavigation'
 import { logout } from '../slices/authSlice'
 
 
@@ -42,8 +43,9 @@ const Header = () => {
                   Shred Central
                 </Navbar.Brand>
               </LinkContainer>
+              <CategoryNavigation />
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Collapse id="basic-navbar-nav"> 
                     <Nav className="ms-auto">
                       <SearchBox />
                         <LinkContainer to="/cart">
@@ -90,7 +92,6 @@ const Header = () => {
                        
                     </Nav>
                 </Navbar.Collapse>
-                
             </Container>
 
         </Navbar>

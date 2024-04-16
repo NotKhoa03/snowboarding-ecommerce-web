@@ -15,11 +15,16 @@ const getProducts = asyncHandler(async (req, res) => {
     //Get the keyword from the query string, case insensitive
     const keyword = req.query.keyword ? { name: { $regex: req.query.keyword, $options: 'i' } } : {};
 
+    // Get the category from the query string
+    const category = req.query.category ? { category: req.query.category } : {};
+
+    const filter = { ...keyword, ...category };
+
     //Get the total number of products available
-    const count = await Product.countDocuments({...keyword});
+    const count = await Product.countDocuments(filter);
 
     //Get the products based on the page number and keyword
-    const products = await Product.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
+    const products = await Product.find(filter).limit(pageSize).skip(pageSize * (page - 1));
     res.send({products, page, pages: Math.ceil(count / pageSize)})
 })
 

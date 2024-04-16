@@ -124,3 +124,44 @@ table th {
 .size-length {
   width: 90%; 
 }
+
+.categories {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.Nav {
+ 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navBar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.category-button {
+  border: 1px solid #000;
+  background: white;
+  margin: 5px 5px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+}
+
+.category-button:hover {
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0);
+}
+
+.active {
+  background-color: #1e293b;
+  color: #fff;
+}

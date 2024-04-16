@@ -11,8 +11,8 @@ import { useGetProductsQuery } from '../slices/productApiSlice'
 
 const HomeScreen = () => {
   //Pagination to show which page we are on
-  const { pageNumber, keyword } = useParams()
-  const { data, isLoading, error} = useGetProductsQuery({keyword, pageNumber})
+  const { pageNumber, keyword, category } = useParams()
+  const { data, isLoading, error} = useGetProductsQuery({keyword, pageNumber, category})
 
   return (
     <>
