@@ -70,7 +70,13 @@ const productSchema = mongoose.Schema({
         type: Number,
         required: true,
         default: 0
-    }
+    },
+    sizes: [
+        {
+            size: { type: String, required: true },
+            qty: { type: Number, required: true }
+        }
+    ]
 }, {
     timestamps: true
 })

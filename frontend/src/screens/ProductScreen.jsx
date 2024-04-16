@@ -20,6 +20,7 @@ const ProductScreen = () => {
     const [qty, setQty] = useState(1)
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('')
+    const [selectedSize, setSelectedSize] = useState('')
 
     const { data: product, isLoading, refetch, error } = useGetProductDetailsQuery(productId)
 
@@ -28,10 +29,9 @@ const ProductScreen = () => {
     const { userInfo } = useSelector(state => state.auth)
 
     const addToCartHandler = () => {
-        dispatch(addToCart({...product, qty}));
+        dispatch(addToCart({...product, qty, selectedSize}));
         navigate('/cart');
     }
-
     const submitHandler = async (e) => {
         e.preventDefault()
         try {
@@ -69,6 +69,26 @@ const ProductScreen = () => {
                      <ListGroup.Item>
                          <h3>{product.name}</h3>
                      </ListGroup.Item>
+
+                     <ListGroup.Item>
+                        <Row>
+                        <Col>Size:</Col>
+                        <Col>
+                        <div className="size-button-container">
+                            {product.sizes.map((sizeInfo) => (
+                            <Button
+                                key={sizeInfo.size}
+                                onClick={() => setSelectedSize(sizeInfo)}
+                                className={`size-button ${selectedSize.size === sizeInfo.size ? 'selected' : ''}`}
+                                disabled={sizeInfo.stock === 0}
+                            >
+                                {sizeInfo.size}
+                            </Button>
+                            ))}
+                        </div>
+                        </Col>
+                        </Row>
+                    </ListGroup.Item>
                      <ListGroup.Item>
                          <Rating value={product.rating} text={`${product.numReviews} reviews`} />
                      </ListGroup.Item>
@@ -95,17 +115,17 @@ const ProductScreen = () => {
                              <Row>
                                  <Col>Status:</Col>
                                  <Col>
-                                     {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
+                                     {selectedSize.qty > 0 ? `${selectedSize.qty} left!` : 'Out of Stock'}
                                  </Col>
                              </Row>
                          </ListGroup.Item>
-                         {product.countInStock > 0 && (
+                         {selectedSize.qty > 0 && (
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Qty</Col>
                                     <Col>
                                         <Form.Control as='select' value={qty} onChange={(e) => setQty(Number(e.target.value))}>
-                                            {[...Array(product.countInStock).keys()].map(x => (
+                                            {[...Array(selectedSize.qty).keys()].map(x => (
                                                 <option key={x + 1} value={x + 1}>
                                                     {x + 1}
                                                 </option>
@@ -116,7 +136,7 @@ const ProductScreen = () => {
                             </ListGroup.Item>
                          )}
                          <ListGroup.Item>
-                             <Button className='btn-block' type='button' disabled={product.countInStock === 0} onClick={addToCartHandler}>
+                             <Button className='btn-block' type='button' disabled={selectedSize.qty === 0} onClick={addToCartHandler}>
                                  Add To Cart
                              </Button>
                          </ListGroup.Item>
