@@ -6,14 +6,14 @@ const CategoryNavigation = () => {
     const { category: urlCategory } = useParams()
     const [category, setCategory] = useState(urlCategory || '')
 
-    const categories = ['Electronics', 'category2', 'category3']; 
+    const categories = ['Electronics', 'Snowboards', 'Outerwear', 'Boots']; 
   useEffect(() => {
     setCategory(urlCategory);
   }, [urlCategory]);
   return (
     <div className="categories">
     {categories.map((cat) => (
-        <button className={`category-button ${category === cat ? 'active' : ''}`}
+        <button className={`category-button ${category === cat ? 'active-button' : ''}`}
           key={cat}
           onClick={() => {
             setCategory(cat);

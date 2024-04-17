@@ -5,12 +5,16 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import { useParams } from 'react-router-dom'
+import ShopVideo from './components/ShopVideo'
+import ShopVideoHomepage from './components/ShopVideoHomepage'
 
 const App = () => {
+  const {category} = useParams()
   return (
     <>
       <Header />
-      
+      {category ? <ShopVideo /> : <ShopVideoHomepage />}
       <main className='py-3'>
         <Container>
           <Outlet />

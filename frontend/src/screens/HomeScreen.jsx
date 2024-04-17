@@ -5,6 +5,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
+import ShopRow from '../components/ShopRow'
 import { useGetProductsQuery } from '../slices/productApiSlice'
 
 
@@ -16,24 +17,25 @@ const HomeScreen = () => {
 
   return (
     <>
-      {!keyword ? <ProductCarousel /> : (<Link to='/' className='btn btn-light mb-4'>Go Back</Link>)}
+      {!keyword && !category ? <ProductCarousel /> : (<Link to='/' className='btn btn-light mb-4'>Go Back</Link>)}
+      
         { isLoading ? (
           <Loader />
         ) : error ? (
         <Message variant='danger'>{ error?.data?.message || error.error }
         </Message>) : (<>
        
-        <h1>Latest Products</h1>
+        <h1>{!category ? 'Latest Products' : category}</h1>
         <Row> 
             {data.products.map(product => (
-                <Col key ={product.id} sm={12} md={6} lg={4} xl={3}>
+                <Col key ={product.id} sm={12} md={6} lg={4} xl={4}>
                     <Product product={product} />
                 </Col>
             ))}
         </Row>
         <Paginate pages={data.pages} page={data.page} keyword={keyword ? keyword: ''} />
         </>) }
-        
+        {!category ? <ShopRow /> : ''}
     </>
   )
 }

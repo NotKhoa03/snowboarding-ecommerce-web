@@ -91,7 +91,6 @@ const products = [
       { size: 'S', qty: 10 }, { size: 'M', qty: 7 }, { size: 'L', qty: 5 }, { size: 'XL', qty: 0 }
     ],
   },
-
   {
     name: 'Snowboard',
     image: '/images/alexa.jpg',
