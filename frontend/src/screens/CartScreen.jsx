@@ -27,7 +27,7 @@ const CartScreen = () => {
     }
      
     return <Row>
-        <Col md={8}>
+        <Col md={8} style={{ marginTop: '65px' }}> 
             <h1 style={{marginBottom: '20px'}}>Shopping Cart</h1>
             {cartItems.length === 0 ? (
                 <Message>Your cart is empty <Link to='/'>Go Back</Link></Message>
@@ -47,7 +47,7 @@ const CartScreen = () => {
                                 </Col>
                                 <Col md={2}>
                                     <Form.Control as='select' value={item.qty} onChange={(e) => addToCartHandler(item, Number(e.target.value)) }> 
-                                            {[...Array(item.countInStock).keys()].map(x => (
+                                            {[...Array(item.selectedSize.qty).keys()].map(x => (
                                                 <option key={x + 1} value={x + 1}>
                                                     {x + 1}
                                                 </option>
@@ -67,7 +67,7 @@ const CartScreen = () => {
             )}
 
         </Col>
-        <Col md={4}>
+        <Col md={4} style={{ marginTop: '65px' }}>
             <Card>
                 <ListGroup variant='flush'>
                     <ListGroup.Item>

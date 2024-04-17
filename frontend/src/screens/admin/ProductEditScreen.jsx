@@ -20,7 +20,7 @@ const ProductEditScreen = () => {
     const [image, setImage] = useState('')
     const [brand, setBrand] = useState('')
     const [category, setCategory] = useState('')
-    const [countInStock, setCountInStock] = useState(0)
+   
     const [description, setDescription] = useState('')
 
     const { data: product, isLoading, refetch, error } = useGetProductDetailsQuery(productId)
@@ -36,7 +36,7 @@ const ProductEditScreen = () => {
             setImage(product.image)
             setBrand(product.brand)
             setCategory(product.category)
-            setCountInStock(product.countInStock)
+        
             setDescription(product.description)
             setSizes(product.sizes)
             
@@ -55,7 +55,6 @@ const ProductEditScreen = () => {
             brand,
             category,
             description,
-            countInStock,
             sizes
           }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
           toast.success('Product updated');
@@ -132,10 +131,7 @@ const ProductEditScreen = () => {
                     <Form.Label>Category</Form.Label>
                     <Form.Control type='text' placeholder='Enter category' value={category} onChange={(e) => setCategory(e.target.value)}></Form.Control>
                 </Form.Group>
-                <Form.Group controlId='countInStock'>
-                    <Form.Label>Count In Stock</Form.Label>
-                    <Form.Control type='number' placeholder='Enter countInStock' value={countInStock} onChange={(e) => setCountInStock(e.target.value)}></Form.Control>
-                </Form.Group>
+             
                 <Form.Group controlId='description'>
                     <Form.Label>Description</Form.Label>
                     <Form.Control type='text' placeholder='Enter description' value={description} onChange={(e) => setDescription(e.target.value)}></Form.Control>

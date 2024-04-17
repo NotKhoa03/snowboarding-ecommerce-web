@@ -44,6 +44,7 @@ const LoginScreen = () => {
     }
 
     return (
+        <div style={{ marginTop: '65px' }}>
         <FormContainer>
             <h1>Sign In</h1>
             <Form onSubmit={submitHandler}>
@@ -81,6 +82,7 @@ const LoginScreen = () => {
             </Row>
 
         </FormContainer>
+        </div>
     )
 }
 

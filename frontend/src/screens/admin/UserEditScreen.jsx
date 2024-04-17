@@ -46,9 +46,9 @@ const UserEditScreen = () => {
           toast.error(err?.data?.message || err.error);
         }
     }
-  return <>
+  return <div style={{ marginTop: '65px' }}>
     <Link to='/admin/userlist' className='btn btn-light my-3'>Go Back</Link>
-    <FormContainer>
+    <FormContainer >
         <h1> Edit User </h1>
         {loadingUpdate && <Loader />}
 
@@ -71,7 +71,7 @@ const UserEditScreen = () => {
             </Form>
         )}
     </FormContainer>
-  </>
+  </div>
 }
 
 export default UserEditScreen

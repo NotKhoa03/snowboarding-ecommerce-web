@@ -48,7 +48,7 @@ const ProfileScreen = () => {
         }
     }
 
-  return <Row>
+  return <Row style={{ marginTop: '65px' }}>
     <Col md={3}>
         <h2>User Profile</h2>
         <Form onSubmit={submitHandler}>

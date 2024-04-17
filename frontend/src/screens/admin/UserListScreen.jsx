@@ -23,7 +23,7 @@ const UserListScreen = () => {
       }
     }
   }
-  return <>
+  return <div style={{ marginTop: '65px' }}>
       <h1>Users</h1>
       {loadingDelete && <Loader />}
       {isLoading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
@@ -57,7 +57,7 @@ const UserListScreen = () => {
           </tbody>
         </Table>
       )}
-  </>
+  </div>
   
 }
 

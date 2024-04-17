@@ -27,6 +27,7 @@ const ShippingScreen = () => {
         navigate('/payment')
     }
     return (
+        <div style={{ marginTop: '75px' }}>
         <FormContainer>
             <CheckoutSteps step1 step2 />
             <h1>Shipping</h1>
@@ -76,6 +77,7 @@ const ShippingScreen = () => {
                 </Button>
             </Form>
         </FormContainer>
+        </div>
     )
 }
 

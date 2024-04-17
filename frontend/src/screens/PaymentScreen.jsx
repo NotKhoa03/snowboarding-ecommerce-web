@@ -32,6 +32,7 @@ const PaymentScreen = () => {
 
     // The user can select the payment method they prefer
   return (
+    <div style={{ marginTop: '75px' }}>
     <FormContainer>
       <CheckoutSteps step1 step2 step3 />
       <h1>Payment Method</h1>
@@ -66,7 +67,7 @@ const PaymentScreen = () => {
         </Button>
       </Form>
     </FormContainer>
-
+    </div>
   )
 }
 

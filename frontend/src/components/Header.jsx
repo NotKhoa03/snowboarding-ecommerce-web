@@ -4,7 +4,7 @@ import { Navbar, Nav, Container, Badge, NavDropdown } from 'react-bootstrap'
 import { FaShoppingCart, FaUser} from 'react-icons/fa'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import logo from '../assets/icon.png'
+import logo from '../assets/Shredcentral.png'
 import { useLogoutMutation } from '../slices/usersApiSlice'
 import SearchBox from './SearchBox'
 import CategoryNavigation from './CategoryNavigation'
@@ -35,15 +35,15 @@ const Header = () => {
 
   return (
     <header>
-        <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
+        <Navbar bg="primary" variant="dark" expand="xxl" collapseOnSelect fixed="top">
             <Container>
               <LinkContainer to="/">
-                <Navbar.Brand>
-                    <img src={logo} alt="Shred Central" width="50" height="50" />
-                  Shred Central
+                <Navbar.Brand className='logo'>
+                    <img src={logo} alt="Shred Central" width="20" height="20" />
+                 
                 </Navbar.Brand>
               </LinkContainer>
-              <CategoryNavigation />
+              <CategoryNavigation/>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav"> 
                     <Nav className="ms-auto">

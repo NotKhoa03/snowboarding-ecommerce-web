@@ -58,7 +58,7 @@ const PlaceOrderScreen = () => {
     
   }
   return (
-    <>
+    <div style={{ marginTop: '75px' }}>
         <CheckoutSteps step1 step2 step3 step4 />
         <Row>
             <Col md={8}>
@@ -143,7 +143,7 @@ const PlaceOrderScreen = () => {
                 </Card>
             </Col>
         </Row>
-    </>
+    </div>
   )
 }
 

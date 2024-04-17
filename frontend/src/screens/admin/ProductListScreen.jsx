@@ -43,7 +43,7 @@ const ProductListScreen = () => {
     }
 
   return <>
-    <Row className='align-items-center'>
+    <Row className='align-items-center' style={{ marginTop: '65px' }}>
         <Col>
             <h1>Products</h1>
         </Col>
