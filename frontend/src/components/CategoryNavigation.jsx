@@ -6,7 +6,7 @@ const CategoryNavigation = () => {
     const { category: urlCategory } = useParams()
     const [category, setCategory] = useState(urlCategory || '')
 
-    const categories = ['Electronics', 'Snowboards', 'Outerwear', 'Boots']; 
+    const categories = ['Snowboards', 'Outerwear', 'Boots', 'Bindings']; 
   useEffect(() => {
     setCategory(urlCategory);
   }, [urlCategory]);

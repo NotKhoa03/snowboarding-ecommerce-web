@@ -9,7 +9,7 @@ import Product from '../models/productModel.js';
 // @access Public
 const getProducts = asyncHandler(async (req, res) => { 
     //Page size for homepage is 4, for other pages it is 8
-    const pageSize = (!req.query.keyword && !req.query.category) ? 6 : (req.query.pageSize ? Number(req.query.pageSize) : 12);
+    const pageSize = (!req.query.keyword && !req.query.category) ? 3 : (req.query.pageSize ? Number(req.query.pageSize) : 12);
     //req.query.pageNumber is the page number, if not provided, default to 1
     const page = Number(req.query.pageNumber) || 1;
 

@@ -32,6 +32,7 @@ const Product = ({ product }) => {
                             onClick={() => setSelectedSize(sizeInfo)}
                             className={`size-button ${selectedSize.size === sizeInfo.size ? 'selected' : ''}`}
                             disabled={sizeInfo.stock === 0}
+                            style={{ fontSize: '15px' }}
                         >
                             {sizeInfo.size}
                         </Button>

@@ -81,6 +81,7 @@ const ProductScreen = () => {
                                 onClick={() => setSelectedSize(sizeInfo)}
                                 className={`size-button ${selectedSize.size === sizeInfo.size ? 'selected' : ''}`}
                                 disabled={sizeInfo.stock === 0}
+                                style={{ fontSize: '15px' }}
                             >
                                 {sizeInfo.size}
                             </Button>
@@ -115,7 +116,7 @@ const ProductScreen = () => {
                              <Row>
                                  <Col>Status:</Col>
                                  <Col>
-                                     {selectedSize.qty > 0 ? `${selectedSize.qty} left!` : 'Out of Stock'}
+                                     {selectedSize === '' ? 'Select a size' : selectedSize.qty > 0 ? `${selectedSize.qty} left!` : 'Out of Stock'}
                                  </Col>
                              </Row>
                          </ListGroup.Item>
@@ -136,7 +137,7 @@ const ProductScreen = () => {
                             </ListGroup.Item>
                          )}
                          <ListGroup.Item>
-                             <Button className='btn-block' type='button' disabled={selectedSize.qty === 0} onClick={addToCartHandler}>
+                             <Button className='btn-block' type='button' disabled={selectedSize.qty === 0 || selectedSize === ''} onClick={addToCartHandler}>
                                  Add To Cart
                              </Button>
                          </ListGroup.Item>
