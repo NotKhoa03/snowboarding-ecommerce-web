@@ -10,6 +10,7 @@ import { useCreateOrderMutation} from '../slices/ordersApiSlice'
 import { useUpdateProductStockMutation } from '../slices/productApiSlice'
 import { clearCartItems } from '../slices/cartSlice'
 
+
 const PlaceOrderScreen = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -19,6 +20,7 @@ const PlaceOrderScreen = () => {
   const [updateProductStock] = useUpdateProductStockMutation()
 
   useEffect(() => {
+    
     if (!cart.shippingAddress.address) {
       navigate('/shipping')
     }
@@ -30,7 +32,6 @@ const PlaceOrderScreen = () => {
 
   //Place and create order, then redirect to order screen with the created id
   const placeOrderHandler = async () => {
-    console.log(cart.cartItems)
     try {
         //create an order
         const res = await createOrder({

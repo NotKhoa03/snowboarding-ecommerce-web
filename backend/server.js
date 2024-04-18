@@ -10,11 +10,13 @@ import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 
+
 const port = process.env.PORT || 5000;
 
 connectDB();
 
 const app=express();
+
 
 //Body parser middleware
 app.use(express.json());
@@ -28,8 +30,6 @@ app.get('/',(req,res)=>{
     }   
 );
 
-
-
 //Routes
 
 app.use('/api/products',productRoutes);
@@ -39,6 +39,8 @@ app.use('/api/upload',uploadRoutes);
 
 //Store clientId in env file so that it is not exposed to the frontend
 app.get('/api/config/paypal', (req, res) => res.send( {clientId: process.env.PAYPAL_CLIENT_ID }));
+
+
 
 //Make uploads folder static
 const _dirname = path.resolve(); 

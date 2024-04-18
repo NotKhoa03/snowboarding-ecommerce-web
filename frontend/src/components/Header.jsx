@@ -9,6 +9,7 @@ import { useLogoutMutation } from '../slices/usersApiSlice'
 import SearchBox from './SearchBox'
 import CategoryNavigation from './CategoryNavigation'
 import { logout } from '../slices/authSlice'
+import { resetCart } from '../slices/cartSlice'
 
 
 
@@ -26,6 +27,7 @@ const Header = () => {
     try {
       await logoutApiCall().unwrap()
       dispatch(logout())   
+      dispatch(resetCart())
       navigate('/login')
     } catch (error) {
       console.error('Failed to logout:', error)

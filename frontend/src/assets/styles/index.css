@@ -147,7 +147,7 @@ table th {
   border-radius: 0px;
   padding: 5px 10px;
   cursor: pointer;
-  color: black;
+  color: white;
   
   transition: all 0.2s ease-in-out;
   
@@ -160,9 +160,10 @@ table th {
 
 .active-button {
   font-weight: bold;
+  font-size: 1.2em;
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0);
   text-shadow: none;
-  color: #fff;
+  color: rgb(118, 161, 226)
 }
 
 .product-image {
