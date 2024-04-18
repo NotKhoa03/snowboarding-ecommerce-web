@@ -4581,16 +4581,16 @@ fieldset:disabled .btn {
   border-radius: var(--bs-card-inner-border-radius);
 }
 
+
+
 .card-img,
 .card-img-top,
 .card-img-bottom {
-  width: 100%;
-  max-width: 375px; /* Maximum width of the image */
-  min-width: 375px; /* Minimum width of the image */
-  max-height: 506px; /* Maximum height of the image */
-  min-height: 506px; /* Minimum height of the image */
-  object-fit: cover;
+  width: 100%; /* This makes the image responsive on smaller screens */
+  height: 506px;
 }
+
+
 
 .card-img,
 .card-img-top {
