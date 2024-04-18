@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
 import { Carousel, Image } from 'react-bootstrap'
 import Message from './Message'
@@ -13,6 +13,7 @@ const ProductCarousel = () => {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
+  
 
   return isLoading ? <></>: error ? <Message variant='danger'>{error?.data?.message || error.error}</Message> : (
     <Carousel activeIndex={index} onSelect={handleSelect} pause='hover' className='carousel-container mb-4' style={{ backgroundImage: backgrounds[index % backgrounds.length]}}>

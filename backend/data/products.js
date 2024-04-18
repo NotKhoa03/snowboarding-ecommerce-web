@@ -152,7 +152,7 @@ const products = [
     brand: 'Burton',
     category: 'Outerwear',
     price: 299.95,
-    rating: 4.8,
+    rating: 4.9,
     numReviews: 12,
     sizes: [
       { size: 'XS', qty: 10 }, { size: 'S', qty: 8 }, { size: 'M', qty: 5 }, { size: 'L', qty: 2 }

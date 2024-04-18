@@ -6,12 +6,20 @@ main {
   padding-top: 1000px; /* Adjust this value to match the height of your header */
 }
 
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%) scale(8) translateY(-3px);
+  }
+  100% {
+    transform: translateY(0) scale(8) translateY(-3px);
+  }
+}
 
 .logo {
-  
   transform: scale(8) translateY(-3px);  /* Adjust this value to your liking */
   display: inline-block;
   margin-right: 60px;
+  animation: slideInFromTop .5s ease-out;
 }
 .rating span {
   margin: 0.1rem;
@@ -221,6 +229,21 @@ table th {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+@keyframes slide-fade-in-right {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-fade-in-right {
+  animation: slide-fade-in-right 1s forwards;
+}
+
 .screen-title{
   font-size: 2em;
   font-weight: 400;
@@ -231,9 +254,40 @@ table th {
 }
 
 .carousel-container {
-  margin-top: 65px;
+  margin-top: 15px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-radius: 10px;
   height: 400px;
   background-size: 50% 100%;
+
 }
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-left {
+  animation: fadeInLeft 1s forwards;
+}
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fade-in 2s forwards;
+}
+
